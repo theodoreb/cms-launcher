@@ -93,6 +93,10 @@ test('happy path', async ({}, testInfo) => {
         console.debug(line);
       });
 
+  // Confirm that icon files are readable, including from a Windows path.
+  await new PhpCommand(join(root, 'assert-icon-finder.php'))
+      .run({ cwd: root });
+
   // Confirm that a version number was recorded.
   const { stdout } = await new ComposerCommand('config', 'extra.drupal-launcher.version')
       .inDirectory(root)
